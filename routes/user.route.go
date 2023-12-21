@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/joeltiago00/first-api-go-lang/http/controllers/users_controller"
 )
 
 func UsersHandle(r *gin.Engine) {
@@ -10,8 +10,6 @@ func UsersHandle(r *gin.Engine) {
 
 	route.Use()
 	{
-		route.GET("", func(context *gin.Context) {
-			context.JSON(http.StatusOK, gin.H{"message": "API IS ON FIRE!"})
-		})
+		route.POST("", users_controller.Store)
 	}
 }
