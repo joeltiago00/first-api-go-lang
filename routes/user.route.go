@@ -11,5 +11,6 @@ func UsersHandle(r *gin.Engine) {
 	route.Use()
 	{
 		route.POST("", users_controller.Store)
+		route.PATCH("/:userId", users_controller.Update)
 	}
 }

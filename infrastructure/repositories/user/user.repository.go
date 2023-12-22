@@ -17,8 +17,24 @@ func ExistsByEmail(email string) bool {
 	return true
 }
 
+func ExistsById(userId int) bool {
+	var user models.User
+
+	db.Database().Where(models.User{ID: userId}).First(&user)
+
+	if user.ID == 0 {
+		return false
+	}
+
+	return true
+}
+
 func Store(user models.User) models.User {
 	db.Database().Create(&user)
 
 	return user
+}
+
+func UpdateById(userId int, user models.User) {
+	db.Database().Where(&models.User{ID: userId}).UpdateColumns(user)
 }

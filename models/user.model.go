@@ -12,4 +12,5 @@ type User struct {
 	Password        string
 	EmailVerifiedAt time.Time
 	gorm.Model
+	ID int
 }
