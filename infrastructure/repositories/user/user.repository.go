@@ -1,6 +1,8 @@
 package user
 
 import (
+	"errors"
+	"fmt"
 	"github.com/joeltiago00/first-api-go-lang/helpers/db"
 	"github.com/joeltiago00/first-api-go-lang/models"
 )
@@ -37,4 +39,16 @@ func Store(user models.User) models.User {
 
 func UpdateById(userId int, user models.User) {
 	db.Database().Where(&models.User{ID: userId}).UpdateColumns(user)
+}
+
+func FindById(userId int) (models.User, error) {
+	var user models.User
+
+	db.Database().Where(&models.User{ID: userId}).First(&user)
+
+	if user.ID == 0 {
+		return user, errors.New(fmt.Sprintf("User %d not found.", userId))
+	}
+
+	return user, nil
 }
