@@ -1,6 +1,7 @@
 package models
 
 import (
+	"gorm.io/gorm"
 	"time"
 )
 
@@ -11,9 +12,9 @@ type User struct {
 	Email           string    `json:"email"`
 	Password        string    `json:"-"`
 	EmailVerifiedAt time.Time `json:"-"`
-	CreatedAt       time.Time `json:"-"`
-	UpdatedAt       time.Time `json:"-"`
-	DeletedAt       time.Time `json:"-"`
+	//CreatedAt       time.Time `json:"-"`
+	//UpdatedAt       time.Time `json:"-"`
+	//DeletedAt       time.Time `json:"-"`
 
-	//gorm.Model
+	gorm.Model
 }
