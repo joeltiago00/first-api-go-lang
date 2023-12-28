@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joeltiago00/first-api-go-lang/helpers/db"
-	"github.com/joeltiago00/first-api-go-lang/http/controllers/users_controller"
+	"github.com/joeltiago00/first-api-go-lang/http/controllers/users"
 	"github.com/joeltiago00/first-api-go-lang/http/resources"
 	"github.com/joeltiago00/first-api-go-lang/infrastructure/factories"
 	"github.com/joeltiago00/first-api-go-lang/tests"
@@ -20,7 +20,7 @@ func setupRoutes() *gin.Engine {
 	routes := gin.Default()
 
 	route := routes.Group("/users")
-	route.GET("/:userId", users_controller.Show)
+	route.GET("/:userId", users.NewShowController().Show)
 
 	return routes
 }

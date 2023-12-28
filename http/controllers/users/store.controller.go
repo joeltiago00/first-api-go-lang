@@ -1,4 +1,4 @@
-package users_controller
+package users
 
 import (
 	"github.com/gin-gonic/gin"
@@ -7,7 +7,13 @@ import (
 	"net/http"
 )
 
-func Store(context *gin.Context) {
+type StoreController struct{}
+
+func NewStoreController() *StoreController {
+	return &StoreController{}
+}
+
+func (r *StoreController) Store(context *gin.Context) {
 	var payload map[string]string
 
 	if err := context.ShouldBindJSON(&payload); err != nil {

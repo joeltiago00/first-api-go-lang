@@ -1,4 +1,4 @@
-package users_controller
+package users
 
 import (
 	"github.com/gin-gonic/gin"
@@ -8,7 +8,13 @@ import (
 	"strconv"
 )
 
-func Update(context *gin.Context) {
+type UpdateController struct{}
+
+func NewUpdateController() *UpdateController {
+	return &UpdateController{}
+}
+
+func (r *UpdateController) Update(context *gin.Context) {
 	var payload map[string]string
 
 	userId, _ := strconv.Atoi(context.Param("userId"))

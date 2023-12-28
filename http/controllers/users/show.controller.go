@@ -1,4 +1,4 @@
-package users_controller
+package users
 
 import (
 	"github.com/gin-gonic/gin"
@@ -7,7 +7,14 @@ import (
 	"strconv"
 )
 
-func Show(context *gin.Context) {
+type ShowController struct{}
+
+func NewShowController() *ShowController {
+	return &ShowController{}
+}
+
+func (r *ShowController) Show(context *gin.Context) {
+
 	userId, _ := strconv.Atoi(context.Param("userId"))
 
 	user, err := users_action.Show(userId)

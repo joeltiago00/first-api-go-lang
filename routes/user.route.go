@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/joeltiago00/first-api-go-lang/http/controllers/users_controller"
+	"github.com/joeltiago00/first-api-go-lang/http/controllers/users"
 )
 
 func UsersHandle(r *gin.Engine) {
@@ -10,8 +10,8 @@ func UsersHandle(r *gin.Engine) {
 
 	route.Use()
 	{
-		route.POST("", users_controller.Store)
-		route.PATCH("/:userId", users_controller.Update)
-		route.GET("/:userId", users_controller.Show)
+		route.POST("", users.NewStoreController().Store)
+		route.PATCH("/:userId", users.NewUpdateController().Update)
+		route.GET("/:userId", users.NewShowController().Show)
 	}
 }
