@@ -16,7 +16,7 @@ func TestShowUserSuccess(test *testing.T) {
 	tests.FeatureSetup(test)
 
 	user := factories.NewUserFactory().Create()
-	defer tests.DeleteUser(user.ID)
+	defer tests.DeleteUserById(user.ID)
 
 	route := tests.SetupRoutes()
 

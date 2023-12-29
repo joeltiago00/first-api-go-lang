@@ -17,7 +17,7 @@ func FeatureSetup(test *testing.T) {
 	database.Handler()
 }
 
-func DeleteUser(userId int) {
+func DeleteUserById(userId int) {
 	//TODO:: handle with exclusion data
 	db.Database().Exec(fmt.Sprintf("delete from users where id = %d", userId))
 }
@@ -25,5 +25,5 @@ func DeleteUser(userId int) {
 func SetupRoutes() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 
-	return routes.SetupRoutes()
+	return routes.NewRoutehandler().GetRouteEngine()
 }

@@ -8,5 +8,5 @@ import (
 func main() {
 	database.Handler()
 
-	routes.Handler()
+	routes.NewRoutehandler().Handle()
 }

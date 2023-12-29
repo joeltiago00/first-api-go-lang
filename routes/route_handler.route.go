@@ -5,13 +5,19 @@ import (
 	"net/http"
 )
 
-func Handler() {
-	router := SetupRoutes()
+type RouteHandler struct{}
+
+func NewRoutehandler() *RouteHandler {
+	return &RouteHandler{}
+}
+
+func (handler *RouteHandler) Handle() {
+	router := handler.GetRouteEngine()
 
 	router.Run() // run server
 }
 
-func SetupRoutes() *gin.Engine {
+func (handler *RouteHandler) GetRouteEngine() *gin.Engine {
 	router := gin.Default()
 
 	router.GET("", func(context *gin.Context) {

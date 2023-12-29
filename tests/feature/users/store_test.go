@@ -34,7 +34,7 @@ func TestStoreUserSuccess(test *testing.T) {
 
 	var userResponse resources.UserResource
 	json.Unmarshal(response.Body.Bytes(), &userResponse)
-	defer tests.DeleteUser(userResponse.Data.ID)
+	defer tests.DeleteUserById(userResponse.Data.ID)
 
 	today := time.Now()
 
