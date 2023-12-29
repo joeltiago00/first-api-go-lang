@@ -18,7 +18,7 @@ func (r *StoreController) Store(context *gin.Context) {
 
 	if err := context.ShouldBindJSON(&payload); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"error1": err.Error(),
+			"error": err.Error(),
 		})
 
 		return

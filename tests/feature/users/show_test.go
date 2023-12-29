@@ -3,9 +3,6 @@ package users
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/joeltiago00/first-api-go-lang/helpers/db"
-	"github.com/joeltiago00/first-api-go-lang/http/controllers/users"
 	"github.com/joeltiago00/first-api-go-lang/http/resources"
 	"github.com/joeltiago00/first-api-go-lang/infrastructure/factories"
 	"github.com/joeltiago00/first-api-go-lang/tests"
@@ -15,28 +12,13 @@ import (
 	"testing"
 )
 
-func setupRoutes() *gin.Engine {
-	gin.SetMode(gin.ReleaseMode)
-	routes := gin.Default()
-
-	route := routes.Group("/users")
-	route.GET("/:userId", users.NewShowController().Show)
-
-	return routes
-}
-
-func DeleteUser(userId int) {
-	//TODO:: handle with exclusion data
-	db.Database().Exec(fmt.Sprintf("delete from users where id = %d", userId))
-}
-
-func TestSuccess(test *testing.T) {
+func TestShowUserSuccess(test *testing.T) {
 	tests.FeatureSetup(test)
 
 	user := factories.NewUserFactory().Create()
-	defer DeleteUser(user.ID)
+	defer tests.DeleteUser(user.ID)
 
-	route := setupRoutes()
+	route := tests.SetupRoutes()
 
 	request, _ := http.NewRequest("GET", fmt.Sprintf("/users/%d", user.ID), nil)
 	response := httptest.NewRecorder()
@@ -50,10 +32,10 @@ func TestSuccess(test *testing.T) {
 	assert.Equal(test, http.StatusOK, response.Code)
 }
 
-func TestUserNotExists(test *testing.T) {
+func TestShowUserNotExists(test *testing.T) {
 	tests.FeatureSetup(test)
 
-	route := setupRoutes()
+	route := tests.SetupRoutes()
 
 	request, _ := http.NewRequest("GET", "/users/100000", nil)
 	response := httptest.NewRecorder()
