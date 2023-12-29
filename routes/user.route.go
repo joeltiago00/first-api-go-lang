@@ -5,8 +5,14 @@ import (
 	"github.com/joeltiago00/first-api-go-lang/http/controllers/users"
 )
 
-func UsersHandle(r *gin.Engine) {
-	route := r.Group("/users")
+type UsersRoutes struct{}
+
+func NewUsersRoutes() *UsersRoutes {
+	return &UsersRoutes{}
+}
+
+func (r *UsersRoutes) Handle(router *gin.Engine) {
+	route := router.Group("/users")
 
 	route.Use()
 	{

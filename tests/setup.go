@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joeltiago00/first-api-go-lang/helpers/db"
-	"github.com/joeltiago00/first-api-go-lang/http/controllers/users"
 	"github.com/joeltiago00/first-api-go-lang/infrastructure/database"
+	"github.com/joeltiago00/first-api-go-lang/routes"
 	"testing"
 )
 
@@ -24,11 +24,6 @@ func DeleteUser(userId int) {
 
 func SetupRoutes() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
-	routes := gin.Default()
 
-	route := routes.Group("/users")
-	route.GET("/:userId", users.NewShowController().Show)
-	route.POST("", users.NewStoreController().Store)
-
-	return routes
+	return routes.SetupRoutes()
 }

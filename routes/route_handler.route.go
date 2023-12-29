@@ -6,13 +6,19 @@ import (
 )
 
 func Handler() {
-	r := gin.Default()
+	router := SetupRoutes()
 
-	r.GET("", func(context *gin.Context) {
+	router.Run() // run server
+}
+
+func SetupRoutes() *gin.Engine {
+	router := gin.Default()
+
+	router.GET("", func(context *gin.Context) {
 		context.JSON(http.StatusOK, gin.H{"message": "API IS ON FIRE!"})
 	})
 
-	UsersHandle(r)
+	NewUsersRoutes().Handle(router)
 
-	r.Run() // run server
+	return router
 }
